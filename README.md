@@ -1,6 +1,10 @@
 # git-workshop
 Example repo for git workshop
 
+# Get account on Github
+
+You will need a Github account for this exercise. If you do not have it yet, you can go to https://github.com/join and sign up.
+
 # Install
 
 ## Fedora
@@ -19,9 +23,18 @@ Install git:
 yum install git
 ```
 
-## Both
+## Both systems
 
 Install Visual Studio Code: https://code.visualstudio.com/docs/setup/linux#_rhel-fedora-and-centos-based-distributions
+
+# Git Configuration
+
+To make sure your commits are correctly marked with your name and email, edit and call following commands to configure your name and email
+
+```
+git config --global user.name "<MY NAME>"
+git config --global user.email "<MY_EMAIL>
+```
 
 # Fork
 
@@ -260,3 +273,47 @@ git merge --continue
 ```
 
 Yay! You have successfully resolved a merge conlict!
+
+# Working in a Team
+
+While working on a project as a team you will follow similar workflows as we tried above - issue, branch, code, commit, PR, review, resolving conflicts, merge. So let's try something like this here.
+
+1. Create a new branch
+2. Open the file `names.txt`
+3. Add your username in the file
+4. Commit, push and submit a PR
+ * *This time do not change the base repository, but submit the PR to the upstream repository (`vpavlin/git-workshop`)*
+5. I will merge your PRs
+
+As many people are editing same file, it is highly probable there will be conflicts, so you will have to rebase your change on a new upstream revision (use `git fetch` and `git rebase` commands from the top of this README). WHen you rebase your change on top of new revision, you will need to push the new content of the branch. This will fail
+
+```
+ ! [rejected]        add-name -> add-name (non-fast-forward)
+error: failed to push some refs to 'https://github.com/vpavlin/git-workshop.git'
+```
+
+This is because hashes for your commits changed. To resolve this you will have to do a force push to your branch
+
+```
+git push --force
+```
+
+This will overwrite contents of your branch - always be careful with force pushing and make sure you know what you are doing (and never force push to master:))
+
+Github PR will be automatically updated and the mergeability will be reevaluated.
+
+# Blame others!
+
+Git offeres great set of commands for investigating history of changes in the repository. Two which are probably most useful are
+
+```
+git log
+```
+
+and 
+
+```
+git blame names.txt
+```
+
+Log prints the history of commits in the repository. Blame shows who is the author of each line in a given file. This is specifically useful if something about the content of the file is not clear and you need to find the author. You can also view output of both commands directly in Github UI.
