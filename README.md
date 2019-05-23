@@ -274,6 +274,28 @@ git merge --continue
 
 Yay! You have successfully resolved a merge conlict!
 
+# Going Back in Time
+
+We were changing the `master` branch in previous section. To be able to submit a clean PR to upstream repository in the next section, we need to get our local repo to the same state as the upstream `master` branch. First, let's take a look at the history of the repository
+
+```
+git log
+```
+
+You can now look for `upstream/master` annotation or just print log for that specific remote and branch
+
+```
+git log upstream/master
+```
+
+Then take the commit hash from there and add it to the **reset** command
+
+```
+git reset --hard <HASH>
+```
+
+When you create a new branch now, it will be based on upstream master branch.
+
 # Working in a Team
 
 While working on a project as a team you will follow similar workflows as we tried above - issue, branch, code, commit, PR, review, resolving conflicts, merge. So let's try something like this here.
@@ -304,16 +326,10 @@ Github PR will be automatically updated and the mergeability will be reevaluated
 
 # Blame others!
 
-Git offeres great set of commands for investigating history of changes in the repository. Two which are probably most useful are
-
-```
-git log
-```
-
-and 
+Git offers tools to learn about the history and changes in the repository. One of them (**log**) we tried before. Another one is **blame**.
 
 ```
 git blame names.txt
 ```
 
-Log prints the history of commits in the repository. Blame shows who is the author of each line in a given file. This is specifically useful if something about the content of the file is not clear and you need to find the author. You can also view output of both commands directly in Github UI.
+Blame shows who is the author of each line in a given file. This is specifically useful if something about the content of the file is not clear and you need to find the author. You can also view output of both commands directly in Github UI.
